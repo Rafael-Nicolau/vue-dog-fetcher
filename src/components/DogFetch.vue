@@ -11,8 +11,12 @@
       />
       <button @click="resetSearch()">New Search</button>
       <ul v-if="breedSearch.length && showBreedSearch">
-        <li v-for="name in breedSearch" :key="name" @click="setBreed(name)">
-          {{ name }}
+        <li
+          v-for="term in breedSearch"
+          :key="term"
+          @click="setBreed(term.name)"
+        >
+          {{ term.name }}
         </li>
       </ul>
       <!-- <p v-for="name in breedSearch" :key="name">{{ name }}</p> -->
@@ -30,15 +34,11 @@ export default defineComponent({
   setup() {
     const userInput = ref<string>("");
     const breeds = ref<breeds[]>([]);
-    const breedName = ref<string[]>([]);
     const chosenBreed = ref<string>("");
     const showBreedSearch = ref<boolean>(true);
 
     onMounted(async () => {
       breeds.value = await getBreeds();
-      for (let index = 0; index < breeds.value.length; index++) {
-        breedName.value[index] = breeds.value[index].name;
-      }
     });
 
     const breedSearch = computed(() => {
@@ -46,13 +46,13 @@ export default defineComponent({
         return [];
       }
       let matches = 0;
-      return breedName.value.filter((name) => {
+      return breeds.value.filter((term) => {
         if (
-          name.toLowerCase().includes(userInput.value.toLowerCase()) &&
+          term.name.toLowerCase().includes(userInput.value.toLowerCase()) &&
           matches < 10
         ) {
           matches++;
-          return name;
+          return term;
         }
       });
     });
@@ -72,7 +72,6 @@ export default defineComponent({
     return {
       userInput,
       breeds,
-      breedName,
       breedSearch,
       setBreed,
       showBreedSearch,
