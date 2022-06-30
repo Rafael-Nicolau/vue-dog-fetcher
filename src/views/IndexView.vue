@@ -1,7 +1,6 @@
 <template>
   <div>
     <dog-fetch />
-    <h1>IndexView</h1>
   </div>
 </template>
 

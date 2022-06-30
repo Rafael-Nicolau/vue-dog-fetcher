@@ -15,7 +15,7 @@ export interface breeds {
   name: string;
   country_code?: string;
   bred_for: string;
-  bred_group?: string;
+  breed_group?: string;
   life_span: string;
   origin?: string;
   temperament: string;

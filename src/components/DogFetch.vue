@@ -22,16 +22,26 @@
       <!-- <p v-for="name in breedSearch" :key="name">{{ name }}</p> -->
     </div>
   </nav>
+  <main>
+    <div v-if="isLoading">
+      <h1>Loading, please wait...</h1>
+    </div>
+  </main>
+  <random-dog v-if="!isLoading && !onSearch" />
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import getBreeds from "@/api/getBreeds";
 import { breeds } from "@/api/types";
+import RandomDog from "./RandomDog.vue";
 
 export default defineComponent({
+  components: { RandomDog },
   name: "DogFetch",
   setup() {
+    const isLoading = ref<boolean>(true);
+    const onSearch = ref<boolean>(false);
     const userInput = ref<string>("");
     const breeds = ref<breeds[]>([]);
     const chosenBreed = ref<string>("");
@@ -39,6 +49,7 @@ export default defineComponent({
 
     onMounted(async () => {
       breeds.value = await getBreeds();
+      isLoading.value = false;
     });
 
     const breedSearch = computed(() => {
@@ -76,6 +87,8 @@ export default defineComponent({
       setBreed,
       showBreedSearch,
       resetSearch,
+      isLoading,
+      onSearch,
     };
   },
 });
