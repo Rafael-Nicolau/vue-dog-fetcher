@@ -32,8 +32,13 @@
       </div>
 
       <div v-for="breed in showPerPage" :key="breed" class="dog-breed">
-        <img :src="breed.image.url" alt="Dog Image" />
-        <h2>{{ breed.name }}</h2>
+        <router-link
+          :to="{ name: 'index', query: { breed: breed.name } }"
+          class="router-link"
+        >
+          <img :src="breed.image.url" alt="Dog Image" />
+          <h2>{{ breed.name }}</h2>
+        </router-link>
       </div>
 
       <div class="page-list" v-if="selectPerPage !== 'all'">

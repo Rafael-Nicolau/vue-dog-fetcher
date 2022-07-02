@@ -46,6 +46,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 import getBreeds from "@/api/getBreeds";
 import { breeds } from "@/api/types";
 import RandomDog from "./RandomDog.vue";
@@ -57,14 +58,22 @@ export default defineComponent({
   setup() {
     const isLoading = ref<boolean>(true);
     const onSearch = ref<boolean>(false);
-    const userInput = ref<string>("");
+    const userInput = ref<any>("");
     const breeds = ref<breeds[]>([]);
-    const chosenBreed = ref<string>("");
     const showBreedSearch = ref<boolean>(true);
+    const route = useRoute();
 
     onMounted(async () => {
-      breeds.value = await getBreeds("");
-      isLoading.value = false;
+      if (!route.query.breed) {
+        breeds.value = await getBreeds("");
+        isLoading.value = false;
+      } else {
+        breeds.value = await getBreeds("");
+        showBreedSearch.value = false;
+        userInput.value = route.query.breed;
+        onSearch.value = true;
+        isLoading.value = false;
+      }
     });
 
     const breedSearch = computed(() => {
@@ -86,13 +95,11 @@ export default defineComponent({
 
     const setBreed = computed(() => (name: string) => {
       userInput.value = name;
-      chosenBreed.value = name;
       showBreedSearch.value = false;
     });
 
     const resetSearch = computed(() => () => {
       userInput.value = "";
-      chosenBreed.value = "";
       showBreedSearch.value = true;
       onSearch.value = false;
     });
