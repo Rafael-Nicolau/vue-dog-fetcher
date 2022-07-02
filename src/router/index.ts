@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import IndexView from "@/views/IndexView.vue";
+
+//lazy loading
+const AllBreedsView = () => import("@/views/AllBreedsView.vue");
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,9 +11,9 @@ const routes: Array<RouteRecordRaw> = [
     component: IndexView,
   },
   {
-    path: "/home",
-    name: "home",
-    component: HomeView,
+    path: "/breeds",
+    name: "AllBreeds",
+    component: AllBreedsView,
   },
   // {
   //   path: "/about",

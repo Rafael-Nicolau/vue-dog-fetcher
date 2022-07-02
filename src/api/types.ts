@@ -8,6 +8,13 @@ interface height {
   metric: string;
 }
 
+interface image {
+  id: string;
+  width: number;
+  height: number;
+  url: string;
+}
+
 export interface breeds {
   weight: weight;
   height: height;
@@ -20,6 +27,7 @@ export interface breeds {
   origin?: string;
   temperament: string;
   reference_image_id: string;
+  image?: image;
 }
 
 export interface Dog {

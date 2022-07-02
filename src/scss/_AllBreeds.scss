@@ -1,0 +1,56 @@
+.container-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dog-breed {
+  height: 500px;
+  width: 100%;
+  margin: 0 auto;
+  img {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+  }
+}
+
+.page-list {
+  align-items: center;
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  p {
+    padding: 10px;
+  }
+  ul {
+    justify-content: flex-end;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+
+    li {
+      background-color: lightblue;
+      padding: 10px;
+    }
+    li:hover {
+      cursor: pointer;
+      background-color: lightseagreen;
+    }
+  }
+  .selected {
+    background-color: darkcyan;
+  }
+}
+
+p {
+  background-color: lightblue;
+  padding: 10px;
+}
+p:hover {
+  cursor: pointer;
+  background-color: lightseagreen;
+}
+
+.link {
+  color: blue;
+}

@@ -12,4 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+body {
+  background-color: lightgray;
+}
 </style>
