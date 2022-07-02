@@ -31,15 +31,17 @@
         <p @click="nextPage">Next</p>
       </div>
 
-      <div v-for="breed in showPerPage" :key="breed" class="dog-breed">
-        <router-link
-          :to="{ name: 'index', query: { breed: breed.name } }"
-          class="router-link"
-        >
-          <img :src="breed.image.url" alt="Dog Image" />
-          <h2>{{ breed.name }}</h2>
-        </router-link>
-      </div>
+      <section>
+        <div v-for="breed in showPerPage" :key="breed" class="dog-breed">
+          <router-link
+            :to="{ name: 'index', query: { breed: breed.name } }"
+            class="router-link"
+          >
+            <img :src="breed.image.url" alt="Dog Image" />
+            <h2>{{ breed.name }}</h2>
+          </router-link>
+        </div>
+      </section>
 
       <div class="page-list" v-if="selectPerPage !== 'all'">
         <p @click="prevPage">Prev</p>
